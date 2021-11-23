@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+
+    <!-- 基本信息 -->
+    <description>Netty学习</description>
+    <name>netty-learning</name>
+    <packaging>pom</packaging>
+
+
+    <!-- 项目说明：这里作为聚合工程的父工程 -->
+    <groupId>com.tech</groupId>
+    <artifactId>netty-learning</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+
+    <!-- 子模块 -->
+    <modules>
+        <module>netty-atguigu</module>
+    </modules>
+
+
+
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
+
+
+
+</project>
