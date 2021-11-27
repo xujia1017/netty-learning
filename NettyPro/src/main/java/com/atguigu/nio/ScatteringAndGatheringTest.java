@@ -11,10 +11,10 @@ import java.util.Arrays;
  * Gathering: 从buffer读取数据时，可以采用buffer数组，依次读
  */
 public class ScatteringAndGatheringTest {
+
     public static void main(String[] args) throws Exception {
 
         //使用 ServerSocketChannel 和 SocketChannel 网络
-
         ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
         InetSocketAddress inetSocketAddress = new InetSocketAddress(7000);
 
@@ -28,7 +28,9 @@ public class ScatteringAndGatheringTest {
 
         //等客户端连接(telnet)
         SocketChannel socketChannel = serverSocketChannel.accept();
-        int messageLength = 8;   //假定从客户端接收8个字节
+        //假定从客户端接收8个字节
+        int messageLength = 8;
+
         //循环的读取
         while (true) {
 
@@ -36,10 +38,11 @@ public class ScatteringAndGatheringTest {
 
             while (byteRead < messageLength ) {
                 long l = socketChannel.read(byteBuffers);
-                byteRead += l; //累计读取的字节数
+                //累计读取的字节数
+                byteRead += l;
                 System.out.println("byteRead=" + byteRead);
                 //使用流打印, 看看当前的这个buffer的position 和 limit
-                Arrays.asList(byteBuffers).stream().map(buffer -> "postion=" + buffer.position() + ", limit=" + buffer.limit()).forEach(System.out::println);
+                Arrays.asList(byteBuffers).stream().map(buffer -> "postion=" + buffer.position() + ", limit=" + buffer .limit()).forEach(System.out::println);
             }
 
             //将所有的buffer进行flip
@@ -59,9 +62,6 @@ public class ScatteringAndGatheringTest {
 
             System.out.println("byteRead:=" + byteRead + " byteWrite=" + byteWirte + ", messagelength" + messageLength);
         }
-
-
-
 
     }
 }
