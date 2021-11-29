@@ -7,27 +7,38 @@ import java.nio.ByteBuffer;
 import java.nio.channels.*;
 import java.util.Iterator;
 
+/**
+ * 群聊系统的服务端
+ */
 public class GroupChatServer {
-    //定义属性
+
+    /**
+     * 定义属性
+     */
     private Selector selector;
+
+    /**
+     * 用于监听
+     */
     private ServerSocketChannel listenChannel;
     private static final int PORT = 6667;
 
-    //构造器
-    //初始化工作
+    /**
+     * 构造器
+     * 初始化工作
+     */
     public GroupChatServer() {
 
         try {
-
-            //得到选择器
+            // 得到选择器
             selector = Selector.open();
-            //ServerSocketChannel
+            //S erverSocketChannel
             listenChannel =  ServerSocketChannel.open();
-            //绑定端口
+            // 绑定端口
             listenChannel.socket().bind(new InetSocketAddress(PORT));
-            //设置非阻塞模式
+            // 设置非阻塞模式
             listenChannel.configureBlocking(false);
-            //将该listenChannel 注册到selector
+            // 将该listenChannel 注册到selector
             listenChannel.register(selector, SelectionKey.OP_ACCEPT);
 
         }catch (IOException e) {
@@ -36,12 +47,14 @@ public class GroupChatServer {
 
     }
 
-    //监听
+    /**
+     * 监听
+     */
     public void listen() {
 
         System.out.println("监听线程: " + Thread.currentThread().getName());
-        try {
 
+        try {
             //循环处理
             while (true) {
 
@@ -89,7 +102,9 @@ public class GroupChatServer {
         }
     }
 
-    //读取客户端消息
+    /**
+     * 读取客户端消息
+     */
     private void readData(SelectionKey key) {
 
         //取到关联的channle
@@ -126,7 +141,9 @@ public class GroupChatServer {
         }
     }
 
-    //转发消息给其它客户(通道)
+    /**
+     * 转发消息给其它客户(通道)
+     */
     private void sendInfoToOtherClients(String msg, SocketChannel self ) throws  IOException{
 
         System.out.println("服务器转发消息中...");
