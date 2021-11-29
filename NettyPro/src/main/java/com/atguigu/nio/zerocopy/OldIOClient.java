@@ -5,6 +5,10 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.Socket;
 
+/**
+ * 传统的Java IO的客户端
+ * @author xujia
+ */
 public class OldIOClient {
 
     public static void main(String[] args) throws Exception {

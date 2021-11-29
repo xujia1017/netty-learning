@@ -4,7 +4,10 @@ import java.io.DataInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-//java IO 的服务器
+/**
+ * 传统的java IO 的服务器
+ * @author xujia
+ */
 public class OldIOServer {
 
     public static void main(String[] args) throws Exception {
