@@ -1,4 +1,4 @@
-package com.atguigu.nio;
+package com.tech.nio;
 
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
