@@ -85,7 +85,6 @@ public class NIOServer {
 
                 // 手动从集合中移动当前的selectionKey, 防止重复操作
                 keyIterator.remove();
-
             }
         }
     }
