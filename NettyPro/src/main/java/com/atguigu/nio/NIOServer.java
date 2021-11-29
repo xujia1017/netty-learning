@@ -34,7 +34,7 @@ public class NIOServer {
         // 把serverSocketChannel注册到selector, 关心事件为 OP_ACCEPT
         serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
 
-        System.out.println("注册后的Selectionkey 数量=" + selector.keys().size()); // 1
+        System.out.println("注册后的selectionkey 数量=" + selector.keys().size()); // 1
 
 
 
@@ -69,7 +69,7 @@ public class NIOServer {
                     socketChannel.configureBlocking(false);
                     // 将socketChannel注册到selector, 关注事件为 OP_READ, 同时给socketChannel关联一个Buffer
                     socketChannel.register(selector, SelectionKey.OP_READ, ByteBuffer.allocate(1024));
-                    System.out.println("客户端连接后，注册的Selectionkey数量=" + selector.keys().size()); //2,3,4..
+                    System.out.println("客户端连接后，注册的selectionkey数量=" + selector.keys().size()); //2,3,4..
                 }
 
                 // 如果是 OP_READ，有读取的实践
