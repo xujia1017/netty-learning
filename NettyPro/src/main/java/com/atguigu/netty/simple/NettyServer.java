@@ -35,18 +35,27 @@ public class NettyServer {
             ServerBootstrap bootstrap = new ServerBootstrap();
 
             // 使用链式编程来进行设置
-            bootstrap.group(bossGroup, workerGroup) //设置两个线程组
-                    .channel(NioServerSocketChannel.class) //使用NioSocketChannel作为服务器的通道实现
-                    .option(ChannelOption.SO_BACKLOG, 128) //设置线程队列得到连接个数
-                    .childOption(ChannelOption.SO_KEEPALIVE, true) //设置保持活动连接状态
-//                    .handler(null) // 该 handler对应 bossGroup , childHandler 对应 workerGroup
-                    // 给我们的workerGroup 的 EventLoop 对应的管道设置处理器
+            bootstrap
+                    //设置两个线程组
+                    .group(bossGroup, workerGroup)
+                    //使用NioSocketChannel作为服务器的通道实现
+                    .channel(NioServerSocketChannel.class)
+                    //设置等待连接的队列的容量（当客户端连接请求速率大于 NioServerSocketChannel 接收速率的时候，会使用该队列做缓冲）
+                    //option()方法用于给服务端的ServerSocketChannel添加配置
+                    .option(ChannelOption.SO_BACKLOG, 128)
+                    //设置保持活动连接状态，childOption()方法用于给服务端ServerSocketChannel接收到的SocketChannel添加配置
+                    .childOption(ChannelOption.SO_KEEPALIVE, true)
+                    // 该 handler对应 bossGroup , childHandler 对应 workerGroup
+                    .handler(null)
+                    // 给我们的workerGroup 的 EventLoop 对应的管道设置业务处理器
                     .childHandler(new ChannelInitializer<SocketChannel>() { //创建一个通道初始化对象(匿名对象)
                         //给pipeline 设置处理器
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
                             System.out.println("客户socketchannel hashcode=" + ch.hashCode()); //可以使用一个集合管理 SocketChannel， 再推送消息时，可以将业务加入到各个channel 对应的 NIOEventLoop 的 taskQueue 或者 scheduleTaskQueue
                             ch.pipeline().addLast(new NettyServerHandler());
+
+                            // 可以继续调用 socketChannel.pipeline().addLast()添加更多 Handler
                         }
                     });
 

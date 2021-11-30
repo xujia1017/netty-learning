@@ -13,14 +13,19 @@ import io.netty.util.CharsetUtil;
  *  1. 我们自定义一个Handler 需要继续netty 规定好的某个HandlerAdapter(规范)
  *  2. 这时我们自定义一个Handler, 才能称为一个handler
  *
+ *  InboundHandler 用于处理数据流入本端（服务端）的 IO 事件
+ *  OutboundHandler 用于处理数据流出本端（服务端）的 IO 事件
+ *
  * @author xujia
  */
 public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 
     /**
-     * 读取数据实际(这里我们可以读取客户端发送的消息)
-     *  1. ChannelHandlerContext ctx:上下文对象, 含有 管道pipeline , 通道channel, 地址
-     *  2. Object msg: 就是客户端发送的数据 默认Object
+     * 当通道有数据可读时执行，会触发此函数(即再这里我们可以读取客户端发送的消息)
+     *
+     * @param ctx 上下文对象，可以从中取得相关联的 管道Pipeline、通道Channel、客户端地址等
+     * @param msg 客户端发送的数据
+     * @throws Exception
      */
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
@@ -31,7 +36,6 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
         //NIOEventLoop 的 taskQueue中,
 
         //解决方案1 用户程序自定义的普通任务
-
         ctx.channel().eventLoop().execute(new Runnable() {
             @Override
             public void run() {
@@ -61,7 +65,6 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
         });
 
         //解决方案2 : 用户自定义定时任务 -》 该任务是提交到 scheduleTaskQueue中
-
         ctx.channel().eventLoop().schedule(new Runnable() {
             @Override
             public void run() {
@@ -75,9 +78,6 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
                 }
             }
         }, 5, TimeUnit.SECONDS);
-
-
-
         System.out.println("go on ...");
 
          */
@@ -90,27 +90,41 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
         ChannelPipeline pipeline = ctx.pipeline(); //本质是一个双向链接, 出站入站
 
 
-        //将 msg 转成一个 ByteBuf
-        //ByteBuf 是 Netty 提供的，不是 NIO 的 ByteBuffer.
+        // 将 msg 转成一个 ByteBuf
+        // 这个ByteBuf 是 Netty 提供的，不是 NIO 的 ByteBuffer.
         ByteBuf buf = (ByteBuf) msg;
         System.out.println("客户端发送消息是:" + buf.toString(CharsetUtil.UTF_8));
         System.out.println("客户端地址:" + channel.remoteAddress());
     }
 
-    //数据读取完毕
+    /**
+     * 数据读取完毕后执行
+     *
+     * @param ctx 上下文对象
+     * @throws Exception
+     */
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
 
-        //writeAndFlush 是 write + flush
-        //将数据写入到缓存，并刷新
-        //一般讲，我们对这个发送的数据进行编码
-        ctx.writeAndFlush(Unpooled.copiedBuffer("hello, 客户端~(>^ω^<)喵1", CharsetUtil.UTF_8));
+        // 发送响应给客户端
+        // writeAndFlush 是 write + flush，将数据写入到缓存，并刷新该缓存
+        // 一般讲，我们要对这个发送的数据进行编码
+        ctx.writeAndFlush(
+                // Unpooled类是Netty提供的专门操作缓冲区的工具类，copiedBuffer方法返回的 ByteBuf对象类似于NIO中的 ByteBuffer，但性能更高
+                Unpooled.copiedBuffer("hello, 客户端~(>^ω^<)喵1", CharsetUtil.UTF_8)
+        );
     }
 
-    //处理异常, 一般是需要关闭通道
-
+    /**
+     * 发生异常时执行,一般是需要关闭通道
+     *
+     * @param ctx   上下文对象
+     * @param cause 异常对象
+     * @throws Exception
+     */
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        // 关闭与客户端的 Socket 连接
         ctx.close();
     }
 }
