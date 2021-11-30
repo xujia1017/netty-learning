@@ -10,20 +10,22 @@ import io.netty.util.CharsetUtil;
 
 /**
  * 说明
- * 1. 我们自定义一个Handler 需要继续netty 规定好的某个HandlerAdapter(规范)
- * 2. 这时我们自定义一个Handler , 才能称为一个handler
+ *  1. 我们自定义一个Handler 需要继续netty 规定好的某个HandlerAdapter(规范)
+ *  2. 这时我们自定义一个Handler, 才能称为一个handler
+ *
+ * @author xujia
  */
 public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 
-    //读取数据实际(这里我们可以读取客户端发送的消息)
-    /*
-    1. ChannelHandlerContext ctx:上下文对象, 含有 管道pipeline , 通道channel, 地址
-    2. Object msg: 就是客户端发送的数据 默认Object
+    /**
+     * 读取数据实际(这里我们可以读取客户端发送的消息)
+     *  1. ChannelHandlerContext ctx:上下文对象, 含有 管道pipeline , 通道channel, 地址
+     *  2. Object msg: 就是客户端发送的数据 默认Object
      */
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
 
-/*
+        /*
 
         //比如这里我们有一个非常耗时长的业务-> 异步执行 -> 提交该channel 对应的
         //NIOEventLoop 的 taskQueue中,
@@ -76,7 +78,9 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 
 
 
-        System.out.println("go on ...");*/
+        System.out.println("go on ...");
+
+         */
 
 
         System.out.println("服务器读取线程 " + Thread.currentThread().getName() + " channle =" + ctx.channel());
