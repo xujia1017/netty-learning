@@ -12,6 +12,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 
 /**
  * Netty 服务端
+ *
  * @author xujia
  */
 public class NettyServer {
@@ -46,7 +47,7 @@ public class NettyServer {
                     //设置保持活动连接状态，childOption()方法用于给服务端ServerSocketChannel接收到的SocketChannel添加配置
                     .childOption(ChannelOption.SO_KEEPALIVE, true)
                     // 该 handler对应 bossGroup , childHandler 对应 workerGroup
-                    .handler(null)
+//                    .handler(null)
                     // 给我们的workerGroup 的 EventLoop 对应的管道设置业务处理器
                     .childHandler(new ChannelInitializer<SocketChannel>() { //创建一个通道初始化对象(匿名对象)
                         //给pipeline 设置处理器
