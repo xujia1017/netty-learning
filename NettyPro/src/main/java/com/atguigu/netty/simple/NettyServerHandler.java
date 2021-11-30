@@ -8,12 +8,10 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.ChannelPipeline;
 import io.netty.util.CharsetUtil;
 
-import java.util.concurrent.TimeUnit;
-
-/*
-说明
-1. 我们自定义一个Handler 需要继续netty 规定好的某个HandlerAdapter(规范)
-2. 这时我们自定义一个Handler , 才能称为一个handler
+/**
+ * 说明
+ * 1. 我们自定义一个Handler 需要继续netty 规定好的某个HandlerAdapter(规范)
+ * 2. 这时我们自定义一个Handler , 才能称为一个handler
  */
 public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 
