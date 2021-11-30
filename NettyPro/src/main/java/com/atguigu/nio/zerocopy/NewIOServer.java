@@ -36,7 +36,7 @@ public class NewIOServer {
                    // ex.printStackTrace();
                     break;
                 }
-                //
+                // 将buffer进行倒带，其实就是重读，和clear的区别就在于limit没有变化
                 byteBuffer.rewind(); //倒带 position = 0 mark 作废
             }
         }
