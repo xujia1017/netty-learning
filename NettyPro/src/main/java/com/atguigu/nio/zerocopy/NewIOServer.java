@@ -8,8 +8,10 @@ import java.nio.channels.SocketChannel;
 
 /**
  * NIO零拷贝 服务端
+ * @author xujia
  */
 public class NewIOServer {
+
     public static void main(String[] args) throws Exception {
 
         InetSocketAddress address = new InetSocketAddress(7001);
@@ -20,7 +22,7 @@ public class NewIOServer {
 
         serverSocket.bind(address);
 
-        //创建buffer
+        // 创建buffer
         ByteBuffer byteBuffer = ByteBuffer.allocate(4096);
 
         while (true) {
@@ -29,9 +31,7 @@ public class NewIOServer {
             int readcount = 0;
             while (-1 != readcount) {
                 try {
-
                     readcount = socketChannel.read(byteBuffer);
-
                 }catch (Exception ex) {
                    // ex.printStackTrace();
                     break;
