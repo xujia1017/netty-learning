@@ -6,7 +6,9 @@ import java.nio.ByteBuffer;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 
-//服务器
+/**
+ * NIO零拷贝 服务端
+ */
 public class NewIOServer {
     public static void main(String[] args) throws Exception {
 

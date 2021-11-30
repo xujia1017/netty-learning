@@ -5,6 +5,9 @@ import java.net.InetSocketAddress;
 import java.nio.channels.FileChannel;
 import java.nio.channels.SocketChannel;
 
+/**
+ * NIO零拷贝 客户端
+ */
 public class NewIOClient {
     public static void main(String[] args) throws Exception {
 
