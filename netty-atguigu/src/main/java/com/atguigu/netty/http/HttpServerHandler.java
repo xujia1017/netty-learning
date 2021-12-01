@@ -1,5 +1,6 @@
 package com.atguigu.netty.http;
 
+
 import java.net.URI;
 
 import io.netty.buffer.ByteBuf;
@@ -41,6 +42,7 @@ public class HttpServerHandler extends SimpleChannelInboundHandler<HttpObject> {
 
         System.out.println("当前ctx的handler=" + ctx.handler());
 
+
         //判断 msg 是不是 httprequest类型的请求
         if(msg instanceof HttpRequest) {
 
@@ -65,7 +67,7 @@ public class HttpServerHandler extends SimpleChannelInboundHandler<HttpObject> {
 
             //构造一个http的相应，即 httpresponse
             FullHttpResponse response = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK, content);
-            response.headers().set(HttpHeaderNames.CONTENT_TYPE, "text/plain;charset=utf-8");
+            response.headers().set(HttpHeaderNames.CONTENT_TYPE, "text/plain;utf-8");
             response.headers().set(HttpHeaderNames.CONTENT_LENGTH, content.readableBytes());
 
             //将构建好 response返回
