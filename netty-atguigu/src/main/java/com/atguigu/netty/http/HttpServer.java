@@ -33,7 +33,7 @@ public class HttpServer {
                     .channel(NioServerSocketChannel.class)
                     .childHandler(new HttpServerInitializer())
             ;
-            ChannelFuture channelFuture = serverBootstrap.bind(6668).sync();
+            ChannelFuture channelFuture = serverBootstrap.bind(8888).sync();
 
             System.out.println("服务器端已经正常启动。。。");
 
