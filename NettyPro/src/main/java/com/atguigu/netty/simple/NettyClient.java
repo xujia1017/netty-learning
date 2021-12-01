@@ -41,7 +41,7 @@ public class NettyClient {
                                     //加入自己的处理器
                                     socketChannel.pipeline().addLast(new NettyClientHandler());
 
-                                    //可以继续调用socketChannel.pipeline().addLast()添加更多 Handler
+                                    //可以继续调用socketChannel.pipeline().addLast()添加更多Handler
                                 }
                             }
                     );
