@@ -21,8 +21,12 @@ public class NettyClient {
         EventLoopGroup eventLoopGroup = new NioEventLoopGroup();
 
         try {
-            //创建客户端启动对象
-            //注意客户端使用的不是 ServerBootstrap 而是 Bootstrap
+
+            /**
+             * 创建客户端启动对象
+             * Bootstrap 和 ServerBootstrap 分别是客户端和服务器端的引导类，
+             * 一个Netty应用程序通常由一个引导类开始，主要是用来配置整个Netty程序、设置业务处理类（Handler）、绑定端口、发起连接等。
+             */
             Bootstrap bootstrap = new Bootstrap();
 
             //设置相关参数
@@ -41,7 +45,9 @@ public class NettyClient {
                                     //加入自己的处理器
                                     socketChannel.pipeline().addLast(new NettyClientHandler());
 
-                                    //可以继续调用socketChannel.pipeline().addLast()添加更多Handler
+                                    /*
+                                     * 可以继续调用socketChannel.pipeline().addLast()添加更多Handler
+                                     */
                                 }
                             }
                     );

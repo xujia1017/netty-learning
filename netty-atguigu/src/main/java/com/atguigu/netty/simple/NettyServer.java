@@ -31,7 +31,12 @@ public class NettyServer {
         EventLoopGroup workerGroup = new NioEventLoopGroup(); //8
 
         try {
-            // 创建服务器端的启动对象，配置参数
+
+            /**
+             * 创建客户端启动对象
+             * Bootstrap 和 ServerBootstrap 分别是客户端和服务器端的引导类，
+             * 一个Netty应用程序通常由一个引导类开始，主要是用来配置整个Netty程序、设置业务处理类（Handler）、绑定端口、发起连接等。
+             */
             ServerBootstrap bootstrap = new ServerBootstrap();
 
             // 使用链式编程来进行设置
@@ -52,10 +57,13 @@ public class NettyServer {
                         //给pipeline 设置处理器
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
-                            System.out.println("客户socketchannel hashcode=" + ch.hashCode()); //可以使用一个集合管理 SocketChannel， 再推送消息时，可以将业务加入到各个channel 对应的 NIOEventLoop 的 taskQueue 或者 scheduleTaskQueue
+                            //可以使用一个集合管理SocketChannel，在推送消息时，可以将业务加入到各个channel对应的NIOEventLoop的taskQueue或者scheduleTaskQueue
+                            System.out.println("客户socketchannel hashcode=" + ch.hashCode());
                             ch.pipeline().addLast(new NettyServerHandler());
 
-                            // 可以继续调用 socketChannel.pipeline().addLast()添加更多 Handler
+                            /*
+                             * 可以继续调用 socketChannel.pipeline().addLast()添加更多 Handler
+                             */
                         }
                     });
 
