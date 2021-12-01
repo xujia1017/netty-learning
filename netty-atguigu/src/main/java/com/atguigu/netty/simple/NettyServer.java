@@ -72,7 +72,7 @@ public class NettyServer {
             //绑定一个端口并且同步, 生成了一个ChannelFuture对象。相当于在这里启动服务器(并绑定端口)
             ChannelFuture channelFuture = bootstrap.bind(6668).sync();
 
-            //给cf注册监听器，监控我们关心的事件
+            //给cf注册监听器，监控我们关心的事件[类似于之前SparkLauncher提交任务之后的回调]
             channelFuture.addListener(new ChannelFutureListener() {
                 @Override
                 public void operationComplete(ChannelFuture future) throws Exception {
