@@ -20,7 +20,6 @@
     <!-- 子模块 -->
     <modules>
         <module>netty-atguigu</module>
-        <module>NettyPro</module>
     </modules>
 
     <properties>

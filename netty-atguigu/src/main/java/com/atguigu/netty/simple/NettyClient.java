@@ -37,7 +37,7 @@ public class NettyClient {
                             new ChannelInitializer<SocketChannel>() {
                                 //向Pipeline添加业务处理器
                                 @Override
-                                protected void initChannel(SocketChannel socketChannel) throws Exception {
+                                protected void initChannel(SocketChannel socketChannel) {
                                     //加入自己的处理器
                                     socketChannel.pipeline().addLast(new NettyClientHandler());
 
