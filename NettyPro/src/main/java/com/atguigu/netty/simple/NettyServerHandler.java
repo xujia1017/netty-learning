@@ -107,11 +107,11 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
 
-        // 发送响应给客户端
-        // writeAndFlush 是 write + flush，将数据写入到缓存，并刷新该缓存
-        // 一般讲，我们要对这个发送的数据进行编码
+        //发送响应给客户端
+        //writeAndFlush 是 write + flush，将数据写入到缓存，并刷新该缓存
+        //一般讲，我们要对这个发送的数据进行编码
         ctx.writeAndFlush(
-                // Unpooled类是Netty提供的专门操作缓冲区的工具类，copiedBuffer方法返回的 ByteBuf对象类似于NIO中的 ByteBuffer，但性能更高
+                //Unpooled类是Netty提供的专门操作缓冲区的工具类，copiedBuffer方法返回的 ByteBuf对象类似于NIO中的 ByteBuffer，但性能更高
                 Unpooled.copiedBuffer("hello, 客户端~(>^ω^<)喵1", CharsetUtil.UTF_8)
         );
     }
@@ -125,7 +125,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
      */
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        // 关闭与客户端的 Socket 连接
+        //关闭与客户端的 Socket 连接
         ctx.close();
     }
 }
