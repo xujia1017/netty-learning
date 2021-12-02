@@ -9,6 +9,7 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.util.NettyRuntime;
 
 /**
  * Netty 服务端
@@ -29,6 +30,8 @@ public class NettyServer {
          */
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workerGroup = new NioEventLoopGroup(8); //8
+
+        System.out.println("本机的默认的NioEventLoop个数=" + NettyRuntime.availableProcessors() * 2);
 
         try {
 
