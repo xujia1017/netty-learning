@@ -2,9 +2,12 @@ package com.atguigu.netty.simple;
 
 import java.util.concurrent.TimeUnit;
 
+import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.channel.ChannelPipeline;
 import io.netty.channel.EventLoop;
 import io.netty.util.CharsetUtil;
 
@@ -88,19 +91,19 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
         System.out.println("go on ...");
 
 
-//        System.out.println("服务器读取线程 " + Thread.currentThread().getName() + " channle =" + ctx.channel());
-//        System.out.println("server ctx =" + ctx);
-//        System.out.println("看看channel 和 pipeline的关系");
-//        Channel channel = ctx.channel();
-//        //本质是一个双向链接, 出栈入栈
-//        ChannelPipeline pipeline = ctx.pipeline();
-//
-//
-//        //将 msg 转成一个 ByteBuf
-//        //这个ByteBuf 是 Netty 提供的，不是 NIO 的 ByteBuffer.
-//        ByteBuf buf = (ByteBuf) msg;
-//        System.out.println("客户端发送消息是:" + buf.toString(CharsetUtil.UTF_8));
-//        System.out.println("客户端地址:" + channel.remoteAddress());
+        System.out.println("服务器读取线程 " + Thread.currentThread().getName() + " channle =" + ctx.channel());
+        System.out.println("server ctx =" + ctx);
+        System.out.println("看看channel 和 pipeline的关系");
+        Channel channel = ctx.channel();
+        //本质是一个双向链接, 出栈入栈
+        ChannelPipeline pipeline = ctx.pipeline();
+
+
+        //将 msg 转成一个 ByteBuf
+        //这个ByteBuf 是 Netty 提供的，不是 NIO 的 ByteBuffer.
+        ByteBuf buf = (ByteBuf) msg;
+        System.out.println("客户端发送消息是:" + buf.toString(CharsetUtil.UTF_8));
+        System.out.println("客户端地址:" + channel.remoteAddress());
     }
 
     /**
