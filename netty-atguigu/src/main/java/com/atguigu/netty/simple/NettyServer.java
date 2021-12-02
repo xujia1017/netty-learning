@@ -51,7 +51,7 @@ public class NettyServer {
                     .option(ChannelOption.SO_BACKLOG, 128)
                     //设置保持活动连接状态，childOption()方法用于给服务端ServerSocketChannel接收到的SocketChannel添加配置
                     .childOption(ChannelOption.SO_KEEPALIVE, true)
-                    // 该 handler对应 bossGroup , childHandler 对应 workerGroup
+                    // 该 handler对应bossGroup , childHandler对应workerGroup
 //                    .handler(null)
                     // 给我们的workerGroup 的 EventLoop 对应的管道设置业务处理器
                     .childHandler(new ChannelInitializer<SocketChannel>() { //创建一个通道初始化对象(匿名对象)
@@ -70,7 +70,7 @@ public class NettyServer {
 
             System.out.println(".....服务器 is ready...");
 
-            //绑定一个端口并且同步, 生成了一个ChannelFuture对象。相当于在这里启动服务器(并绑定端口)
+            //绑定一个端口并且同步, 生成了一个ChannelFuture对象。相当于在这里启动服务器(并绑定端口)，等待异步操作执行完毕
             ChannelFuture channelFuture = bootstrap.bind(6668).sync();
 
             //给cf注册监听器，监控我们关心的事件[类似于之前SparkLauncher提交任务之后的回调]

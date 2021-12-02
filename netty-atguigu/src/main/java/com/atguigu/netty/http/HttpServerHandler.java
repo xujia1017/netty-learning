@@ -39,7 +39,6 @@ public class HttpServerHandler extends SimpleChannelInboundHandler<HttpObject> {
 
 
         System.out.println("对应的channel=" + ctx.channel() + " pipeline=" + ctx.pipeline() + " 通过pipeline获取channel" + ctx.pipeline().channel());
-
         System.out.println("当前ctx的handler=" + ctx.handler());
 
 
