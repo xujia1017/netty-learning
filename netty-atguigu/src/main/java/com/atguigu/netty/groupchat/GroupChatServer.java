@@ -78,7 +78,7 @@ public class GroupChatServer {
             System.out.println("netty 服务器启动");
             ChannelFuture channelFuture = serverBootstrap.bind(port).sync();
 
-            //监听关闭事件
+            //监听关闭事件，异步处理
             channelFuture.channel().closeFuture().sync();
 
         }finally {
