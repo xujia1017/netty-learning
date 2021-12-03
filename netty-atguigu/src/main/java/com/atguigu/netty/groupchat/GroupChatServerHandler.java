@@ -35,9 +35,6 @@ public class GroupChatServerHandler extends SimpleChannelInboundHandler<String> 
         channelGroup.writeAndFlush("[客户端]" + channel.remoteAddress() + " 加入聊天" + sdf.format(new java.util.Date()) + " \n");
         channelGroup.add(channel);
 
-
-
-
     }
 
     //断开连接, 将xx客户离开信息推送给当前在线的客户
@@ -53,14 +50,12 @@ public class GroupChatServerHandler extends SimpleChannelInboundHandler<String> 
     //表示channel 处于活动状态, 提示 xx上线
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-
         System.out.println(ctx.channel().remoteAddress() + " 上线了~");
     }
 
     //表示channel 处于不活动状态, 提示 xx离线了
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-
         System.out.println(ctx.channel().remoteAddress() + " 离线了~");
     }
 

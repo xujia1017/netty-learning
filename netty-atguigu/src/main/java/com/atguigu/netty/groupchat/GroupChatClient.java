@@ -15,6 +15,11 @@ import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 
 
+/**
+ * Netty群聊系统-客户端
+ *
+ * @author xujia
+ */
 public class GroupChatClient {
 
     //属性
@@ -31,8 +36,7 @@ public class GroupChatClient {
 
         try {
 
-
-        Bootstrap bootstrap = new Bootstrap()
+            Bootstrap bootstrap = new Bootstrap()
                 .group(group)
                 .channel(NioSocketChannel.class)
                 .handler(new ChannelInitializer<SocketChannel>() {
@@ -50,10 +54,11 @@ public class GroupChatClient {
                     }
                 });
 
-        ChannelFuture channelFuture = bootstrap.connect(host, port).sync();
-        //得到channel
+            ChannelFuture channelFuture = bootstrap.connect(host, port).sync();
+            //得到channel
             Channel channel = channelFuture.channel();
             System.out.println("-------" + channel.localAddress()+ "--------");
+
             //客户端需要输入信息，创建一个扫描器
             Scanner scanner = new Scanner(System.in);
             while (scanner.hasNextLine()) {
@@ -61,12 +66,14 @@ public class GroupChatClient {
                 //通过channel 发送到服务器端
                 channel.writeAndFlush(msg + "\r\n");
             }
+
         }finally {
             group.shutdownGracefully();
         }
     }
 
     public static void main(String[] args) throws Exception {
-        new GroupChatClient("127.0.0.1", 7000).run();
+        new GroupChatClient("127.0.0.1", 8800).run();
     }
+
 }
