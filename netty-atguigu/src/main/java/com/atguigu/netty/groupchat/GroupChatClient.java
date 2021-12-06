@@ -31,25 +31,47 @@ public class GroupChatClient {
         this.port = port;
     }
 
+    /**
+     * 编写run方法，实现一些客户端的处理
+     *
+     * @throws Exception
+     */
     public void run() throws Exception{
+
+        /**
+         * 创建BossGroup 和 WorkerGroup
+         *
+         *  1. 创建两个线程组 bossGroup 和 workerGroup
+         *  2. bossGroup只是处理连接请求, 真正的和客户端业务处理会交给workerGroup完成
+         *  3. 两个都是无限循环
+         *  4. bossGroup和workerGroup含有的子线程(NioEventLoop)的个数， 默认实际 cpu核数 * 2
+         */
         EventLoopGroup group = new NioEventLoopGroup();
 
         try {
 
+            /**
+             * 创建服务端启动对象
+             *
+             * Bootstrap 和 ServerBootstrap 分别是客户端和服务器端的引导类，
+             * 一个Netty应用程序通常由一个引导类开始，主要是用来配置整个Netty程序、设置业务处理类（Handler）、绑定端口、发起连接等。
+             */
             Bootstrap bootstrap = new Bootstrap()
+                //设置线程组
                 .group(group)
+                //使用NioSocketChannel作为服务器的通道实现
                 .channel(NioSocketChannel.class)
+                // 给我们的workerGroup 的 EventLoop 对应的管道设置业务处理器
                 .handler(new ChannelInitializer<SocketChannel>() {
 
                     @Override
-                    protected void initChannel(SocketChannel ch) throws Exception {
-
+                    protected void initChannel(SocketChannel channel) throws Exception {
                         //得到pipeline
-                        ChannelPipeline pipeline = ch.pipeline();
+                        ChannelPipeline pipeline = channel.pipeline();
                         //加入相关handler
                         pipeline.addLast("decoder", new StringDecoder());
                         pipeline.addLast("encoder", new StringEncoder());
-                        //加入自定义的handler
+                        //加入自定义的业务处理handler
                         pipeline.addLast(new GroupChatClientHandler());
                     }
                 });

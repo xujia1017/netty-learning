@@ -11,6 +11,9 @@ import io.netty.handler.codec.string.StringEncoder;
 /**
  * Netty群聊系统-服务端
  *
+ * 服务端channelGroup，handlerAdded/Removed;
+ * 客户端获取channel在主线程中写操作，同时netty负责一步非阻塞处理读操作
+ *
  * @author xujia
  */
 public class GroupChatServer {

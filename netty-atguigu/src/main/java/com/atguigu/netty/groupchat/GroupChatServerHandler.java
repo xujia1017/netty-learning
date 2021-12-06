@@ -16,11 +16,6 @@ import io.netty.util.concurrent.GlobalEventExecutor;
  */
 public class GroupChatServerHandler extends SimpleChannelInboundHandler<String> {
 
-    //public static List<Channel> channels = new ArrayList<Channel>();
-
-    //使用一个hashmap 管理
-    //public static Map<String, Channel> channels = new HashMap<String,Channel>();
-
     /**
      * 定义一个Channel线程组，管理所有的Channel, 参数执行器
      *  GlobalEventExecutor => 全局事件执行器
@@ -61,7 +56,7 @@ public class GroupChatServerHandler extends SimpleChannelInboundHandler<String> 
 
         Channel channel = ctx.channel();
         channelGroup.writeAndFlush("[" + dateFormat.format(new java.util.Date()) + "] " + "[客户端]" + channel.remoteAddress() + " 离开了\n");
-        // 输出 ChannelGroup 的大小
+        //输出ChannelGroup的大小
         System.out.println("==== ChannelGroup-Size : " + channelGroup.size());
 
     }
@@ -104,9 +99,9 @@ public class GroupChatServerHandler extends SimpleChannelInboundHandler<String> 
         //这时我们遍历channelGroup, 根据不同的情况，回送不同的消息
         channelGroup.forEach(channel -> {
             if(currentChannel != channel) { //不是当前的channel,转发消息
-                channel.writeAndFlush("[客户]" + currentChannel.remoteAddress() + " 发送了消息" + msg + "\n");
+                channel.writeAndFlush("[客户]" + currentChannel.remoteAddress() + " 发送了消息: " + msg + "\n");
             }else {//回显自己发送的消息给自己
-                channel.writeAndFlush("[自己]发送了消息" + msg + "\n");
+                channel.writeAndFlush("[自己]发送了消息: " + msg + "\n");
             }
         });
     }
