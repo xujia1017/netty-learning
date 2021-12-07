@@ -8,7 +8,6 @@ import io.netty.handler.timeout.IdleStateEvent;
  * 自定义一个Handler对空闲检测进一步进行处理
  *
  * 自定义一个Handler，需要继承 Netty 规定好的某个 HandlerAdapter（规范）
- *
  *  InboundHandler 用于处理数据流入本端（服务端）的 IO 事件
  *  OutboundHandler 用于处理数据流出本端（服务端）的 IO 事件
  *
