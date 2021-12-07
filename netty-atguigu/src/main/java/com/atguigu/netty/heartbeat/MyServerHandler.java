@@ -15,7 +15,13 @@ import io.netty.handler.timeout.IdleStateEvent;
  */
 public class MyServerHandler extends ChannelInboundHandlerAdapter {
 
+
+
+
+
+
     /**
+     * 对 空闲事件 的处理
      *
      * @param ctx 上下文
      * @param evt 事件
