@@ -4,9 +4,24 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.handler.timeout.IdleStateEvent;
 
+/**
+ * 自定义一个Handler对空闲检测进一步进行处理
+ *
+ * 自定义一个Handler，需要继承 Netty 规定好的某个 HandlerAdapter（规范）
+ *  InboundHandler 用于处理数据流入本端（服务端）的 IO 事件
+ *  OutboundHandler 用于处理数据流出本端（服务端）的 IO 事件
+ *
+ * @author xujia
+ */
 public class MyServerHandler extends ChannelInboundHandlerAdapter {
 
+
+
+
+
+
     /**
+     * 对 空闲事件 的处理
      *
      * @param ctx 上下文
      * @param evt 事件
@@ -18,6 +33,7 @@ public class MyServerHandler extends ChannelInboundHandlerAdapter {
         if(evt instanceof IdleStateEvent) {
 
             //将evt向下转型 IdleStateEvent
+            //将 evt 向下转型 IdleStateEvent
             IdleStateEvent event = (IdleStateEvent) evt;
             String eventType = null;
             switch (event.state()) {
