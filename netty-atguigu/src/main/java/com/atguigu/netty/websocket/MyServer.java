@@ -16,6 +16,11 @@ import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.stream.ChunkedWriteHandler;
 
 
+/**
+ * 基于WebSocket的服务端
+ *
+ * @author xujia
+ */
 public class MyServer {
     public static void main(String[] args) throws Exception{
 
@@ -51,7 +56,7 @@ public class MyServer {
                      *  1. 对应websocket，它的数据是以 帧(frame) 形式传递
                      *  2. 可以看到WebSocketFrame 下面有六个子类
                      *  3. 浏览器请求时 ws://localhost:7000/hello 表示请求的uri
-                     *  4. WebSocketServerProtocolHandler 核心功能是将 http协议升级为 ws协议 , 保持长连接
+                     *  4. WebSocketServerProtocolHandler核心功能是将 http协议升级为 ws协议, 即保持长连接
                      *  5. 是通过一个 状态码 101
                      */
                     pipeline.addLast(new WebSocketServerProtocolHandler("/hello2"));
@@ -63,6 +68,7 @@ public class MyServer {
 
             //启动服务器
             ChannelFuture channelFuture = serverBootstrap.bind(7000).sync();
+            System.out.println("服务器准备好了");
             channelFuture.channel().closeFuture().sync();
 
         }finally {
