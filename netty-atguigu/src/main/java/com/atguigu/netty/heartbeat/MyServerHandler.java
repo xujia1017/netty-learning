@@ -17,7 +17,7 @@ public class MyServerHandler extends ChannelInboundHandlerAdapter {
 
         if(evt instanceof IdleStateEvent) {
 
-            //将  evt 向下转型 IdleStateEvent
+            //将evt向下转型 IdleStateEvent
             IdleStateEvent event = (IdleStateEvent) evt;
             String eventType = null;
             switch (event.state()) {
