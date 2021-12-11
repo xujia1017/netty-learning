@@ -21,7 +21,7 @@ import io.netty.handler.stream.ChunkedWriteHandler;
  *
  * @author xujia
  */
-public class MyServer {
+public class WebSocketServer {
     public static void main(String[] args) throws Exception{
 
 
@@ -51,7 +51,7 @@ public class MyServer {
                      *  2. 这就就是为什么，当浏览器发送大量数据时，就会发出多次http请求
                      */
                     pipeline.addLast(new HttpObjectAggregator(8192));
-                    /**
+                        /**
                      * 说明
                      *  1. 对应websocket，它的数据是以 帧(frame) 形式传递
                      *  2. 可以看到WebSocketFrame 下面有六个子类
@@ -62,7 +62,7 @@ public class MyServer {
                     pipeline.addLast(new WebSocketServerProtocolHandler("/hello2"));
 
                     //自定义的handler，处理业务逻辑
-                    pipeline.addLast(new MyTextWebSocketFrameHandler());
+                    pipeline.addLast(new TextWebSocketFrameHandler());
                 }
             });
 

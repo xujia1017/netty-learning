@@ -13,7 +13,7 @@ import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
  *
  * @author xujia
  */
-public class MyTextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>{
+public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>{
 
 
     /**
@@ -28,7 +28,7 @@ public class MyTextWebSocketFrameHandler extends SimpleChannelInboundHandler<Tex
 
         System.out.println("服务器收到消息 " + msg.text());
 
-        //回复消息
+        //回复客户端(浏览器)消息
         ctx.channel().writeAndFlush(new TextWebSocketFrame("服务器时间" + LocalDateTime.now() + " " + msg.text()));
     }
 
@@ -40,7 +40,7 @@ public class MyTextWebSocketFrameHandler extends SimpleChannelInboundHandler<Tex
      */
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
-        //id 表示唯一的值，LongText 是唯一的 ShortText 不是唯一
+        //id 表示唯一的值，LongText是唯一的，ShortText不是唯一
         System.out.println("handlerAdded 被调用" + ctx.channel().id().asLongText());
         System.out.println("handlerAdded 被调用" + ctx.channel().id().asShortText());
     }
