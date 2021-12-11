@@ -15,7 +15,6 @@ import io.netty.handler.codec.protobuf.ProtobufDecoder;
 public class NettyServer {
     public static void main(String[] args) throws Exception {
 
-
         //创建BossGroup 和 WorkerGroup
         //说明
         //1. 创建两个线程组 bossGroup 和 workerGroup
