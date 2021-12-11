@@ -11,7 +11,8 @@
     if(window.WebSocket) {
         //go on
         socket = new WebSocket("ws://localhost:7000/hello2");
-        //相当于channelReado, ev 收到服务器端回送的消息
+
+        //相当于channelReado, ev收到服务器端回送的消息
         socket.onmessage = function (ev) {
             var rt = document.getElementById("responseText");
             rt.value = rt.value + "\n" + ev.data;
