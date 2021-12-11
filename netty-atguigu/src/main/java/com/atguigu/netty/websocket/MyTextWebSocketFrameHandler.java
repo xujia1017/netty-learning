@@ -15,6 +15,14 @@ import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
  */
 public class MyTextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>{
 
+
+    /**
+     * channelRead0 读取客户端数据
+     *
+     * @param ctx   上线文环境
+     * @param msg   消息
+     * @throws Exception
+     */
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) throws Exception {
 
