@@ -69,9 +69,9 @@ public class NettyServer {
                 }
             });
 
-
             //对关闭通道进行监听
             cf.channel().closeFuture().sync();
+
         }finally {
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();
