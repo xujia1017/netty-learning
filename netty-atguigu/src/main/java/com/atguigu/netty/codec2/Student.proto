@@ -12,7 +12,7 @@ message MyMessage {
         WorkerType = 1;
     }
 
-    //用data_type 来标识传的是哪一个枚举类型
+    //用data_type 来标识传的是,哪一个枚举类型
     DataType data_type = 1;
 
     //表示每次枚举类型最多只能出现其中的一个, 节省空间
@@ -22,7 +22,6 @@ message MyMessage {
     }
 
 }
-
 
 message Student {
     int32 id = 1;//Student类的属性
