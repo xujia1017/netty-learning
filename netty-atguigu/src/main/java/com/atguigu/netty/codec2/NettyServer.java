@@ -12,6 +12,10 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.protobuf.ProtobufDecoder;
 
+/**
+ *
+ * @author xujia
+ */
 public class NettyServer {
 
     public static void main(String[] args) throws Exception {
