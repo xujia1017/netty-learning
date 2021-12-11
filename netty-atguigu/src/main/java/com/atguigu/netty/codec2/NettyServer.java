@@ -1,8 +1,12 @@
 package com.atguigu.netty.codec2;
 
-import com.atguigu.netty.codec.StudentPOJO;
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.*;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelFutureListener;
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelOption;
+import io.netty.channel.ChannelPipeline;
+import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
@@ -38,8 +42,6 @@ public class NettyServer {
                         //给pipeline 设置处理器
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
-
-
                             ChannelPipeline pipeline = ch.pipeline();
                             //在pipeline加入ProtoBufDecoder
                             //指定对哪种对象进行解码
