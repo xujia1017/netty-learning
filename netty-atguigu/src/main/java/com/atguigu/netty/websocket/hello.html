@@ -26,10 +26,10 @@
 
         //相当于连接关闭(感知到连接关闭)
         socket.onclose = function (ev) {
-
             var rt = document.getElementById("responseText");
             rt.value = rt.value + "\n" + "连接关闭了.."
         }
+
     } else {
         alert("当前浏览器不支持websocket")
     }
