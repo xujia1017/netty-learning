@@ -51,13 +51,13 @@ public class WebSocketServer {
                      *  2. 这就就是为什么，当浏览器发送大量数据时，就会发出多次http请求
                      */
                     pipeline.addLast(new HttpObjectAggregator(8192));
-                        /**
+                    /**
                      * 说明
                      *  1. 对应websocket，它的数据是以 帧(frame) 形式传递
                      *  2. 可以看到WebSocketFrame 下面有六个子类
                      *  3. 浏览器请求时 ws://localhost:7000/hello 表示请求的uri
                      *  4. WebSocketServerProtocolHandler核心功能是将 http协议升级为 ws协议, 即保持长连接
-                     *  5. 是通过一个 状态码 101
+                     *  5. 上面的协议升级的实现是通过一个状态码 101
                      */
                     pipeline.addLast(new WebSocketServerProtocolHandler("/hello2"));
 

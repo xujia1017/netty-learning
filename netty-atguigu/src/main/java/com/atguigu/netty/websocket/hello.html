@@ -36,7 +36,8 @@
 
     //发送消息到服务器
     function send(message) {
-        if(!window.socket) { //先判断socket是否创建好
+        //先判断socket是否创建好
+        if(!window.socket) {
             return;
         }
         if(socket.readyState == WebSocket.OPEN) {

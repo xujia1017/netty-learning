@@ -55,8 +55,9 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
      */
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
-
-        System.out.println("handlerRemoved 被调用" + ctx.channel().id().asLongText());
+        // id 表示标识，asLongText 输出的是唯一的，asShortText 不一定是唯一的
+        System.out.println("handlerRemoved 被调用-- "+ctx.channel().id().asLongText()+" (LongText)");
+        System.out.println("handlerRemoved 被调用-- "+ctx.channel().id().asShortText()+" (ShortText)");
     }
 
     /**
