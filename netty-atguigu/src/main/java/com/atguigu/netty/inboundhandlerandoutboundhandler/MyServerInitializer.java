@@ -11,6 +11,7 @@ public class MyServerInitializer extends ChannelInitializer<SocketChannel> {
 
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
+
         //获取对应的pipeline
         ChannelPipeline pipeline = ch.pipeline();//一会下断点
 

@@ -5,16 +5,22 @@ import io.netty.channel.SimpleChannelInboundHandler;
 
 public class MyClientHandler  extends SimpleChannelInboundHandler<Long> {
 
+    /**
+     * 读取数据
+     *
+     * @param ctx
+     * @param msg
+     * @throws Exception
+     */
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, Long msg) throws Exception {
-
         System.out.println("服务器的ip=" + ctx.channel().remoteAddress());
         System.out.println("收到服务器消息=" + msg);
-
     }
 
     /**
      * 重写channelActive 发送数据
+     *
      * @param ctx
      * @throws Exception
      */
