@@ -36,11 +36,10 @@ public class MyClientHandler  extends SimpleChannelInboundHandler<Long> {
         //3. MyLongToByteEncoder 父类  MessageToByteEncoder
         //4. 父类  MessageToByteEncoder
         /*
-
          public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
         ByteBuf buf = null;
         try {
-            if (acceptOutboundMessage(msg)) { //判断当前msg 是不是应该处理的类型，如果是就处理，不是就跳过encode
+            if (acceptOutboundMessage(msg)) { //判断当前msg是不是应该处理的类型，如果是就处理，不是就跳过encode
                 @SuppressWarnings("unchecked")
                 I cast = (I) msg;
                 buf = allocateBuffer(ctx, cast, preferDirect);
