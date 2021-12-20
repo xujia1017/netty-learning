@@ -9,6 +9,8 @@ import io.netty.channel.socket.SocketChannel;
  *
  * 出站：客户端 --> 服务端
  * 入站：服务端 --> 客户端
+ *
+ * @author xujia
  */
 public class MyClientInitializer extends ChannelInitializer<SocketChannel> {
 
