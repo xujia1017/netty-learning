@@ -3,6 +3,11 @@ package com.atguigu.netty.inboundhandlerandoutboundhandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
+/**
+ *
+ *
+ * @author xujia
+ */
 public class MyServerHandler extends SimpleChannelInboundHandler<Long> {
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, Long msg) throws Exception {
