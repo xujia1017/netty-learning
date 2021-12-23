@@ -18,7 +18,7 @@ import io.netty.util.CharsetUtil;
 public class NettyClientHandler extends ChannelInboundHandlerAdapter {
 
     /**
-     * 当通道就绪就会触发该方法
+     * 当通道就绪就会触发该方法, 这个方法是与服务器的连接创建后第一个被调用
      *
      * @param ctx 上下文对象
      * @throws Exception

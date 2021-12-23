@@ -39,6 +39,9 @@ public class EchoClientHandler extends ChannelInboundHandlerAdapter {
         }
     }
 
+    /**
+     * 当通道就绪就会触发该方法, 这个方法是与服务器的连接创建后第一个被调用
+     */
     @Override
     public void channelActive(ChannelHandlerContext ctx) {
         ctx.writeAndFlush(firstMessage);

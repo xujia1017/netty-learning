@@ -13,7 +13,6 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter {
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
 
         //发生一个Student 对象到服务器
-
         StudentPOJO.Student student = StudentPOJO.Student.newBuilder().setId(4).setName("智多星 吴用").build();
         //Teacher , Member ,Message
         ctx.writeAndFlush(student);

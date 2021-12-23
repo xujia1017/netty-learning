@@ -11,6 +11,9 @@ public class MyClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
 
     private int count;
 
+    /**
+     * 当通道就绪就会触发该方法, 这个方法是与服务器的连接创建后第一个被调用
+     */
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         //使用客户端发送10条数据 hello,server 编号

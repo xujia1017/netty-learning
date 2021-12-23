@@ -9,10 +9,13 @@ public class MyClientHandler extends SimpleChannelInboundHandler<MessageProtocol
 
     private int count;
 
+    /**
+     * 当通道就绪就会触发该方法, 这个方法是与服务器的连接创建后第一个被调用
+     */
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        //使用客户端发送10条数据 "今天天气冷，吃火锅" 编号
 
+        //使用客户端发送10条数据 "今天天气冷，吃火锅" 编号
         for(int i = 0; i< 5; i++) {
             String message = "今天天气冷，吃火锅";
             byte[] content = message.getBytes(StandardCharsets.UTF_8);
@@ -29,6 +32,9 @@ public class MyClientHandler extends SimpleChannelInboundHandler<MessageProtocol
 
     }
 
+    /**
+     * 读取消息
+     */
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, MessageProtocol msg) throws Exception {
 
