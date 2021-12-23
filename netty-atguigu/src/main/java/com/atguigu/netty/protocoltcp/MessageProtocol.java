@@ -1,24 +1,14 @@
 package com.atguigu.netty.protocoltcp;
 
+import lombok.Data;
 
-//协议包
+/**
+ * 协议包
+ */
+@Data
 public class MessageProtocol {
-    private int len; //关键
+
+    private int length; //关键
     private byte[] content;
 
-    public int getLen() {
-        return len;
-    }
-
-    public void setLen(int len) {
-        this.len = len;
-    }
-
-    public byte[] getContent() {
-        return content;
-    }
-
-    public void setContent(byte[] content) {
-        this.content = content;
-    }
 }
