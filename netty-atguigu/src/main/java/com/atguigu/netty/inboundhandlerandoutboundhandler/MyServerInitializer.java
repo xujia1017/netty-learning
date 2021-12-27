@@ -10,12 +10,17 @@ import io.netty.channel.socket.SocketChannel;
 public class MyServerInitializer extends ChannelInitializer<SocketChannel> {
 
     @Override
-    protected void initChannel(SocketChannel ch) throws Exception {
+    protected void initChannel(SocketChannel channel) throws Exception {
 
-        //获取对应的pipeline
-        ChannelPipeline pipeline = ch.pipeline();//一会下断点
+        /**
+         * 获取对应的pipeline
+         */
+        ChannelPipeline pipeline = channel.pipeline();//一会下断点
 
-        //添加对应的handler
+
+        /**
+         * 添加对应的handler
+         */
         // 入站的handler进行Decoder解码
         //pipeline.addLast(new MyByteToLongDecoder());
         pipeline.addLast(new MyByteToLongDecoder2());

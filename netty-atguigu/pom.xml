@@ -31,12 +31,12 @@
             <artifactId>protobuf-java</artifactId>
             <version>3.6.1</version>
         </dependency>
+        <dependency>
+            <groupId>com.suning</groupId>
+            <artifactId>suning-sdk</artifactId>
+            <version>20200306</version>
+        </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>com.suning</groupId>-->
-<!--            <artifactId>suning-sdk</artifactId>-->
-<!--            <version>20200306</version>-->
-<!--        </dependency>-->
 
         <dependency>
             <groupId>log4j</groupId>
