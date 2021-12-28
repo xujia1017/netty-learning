@@ -122,7 +122,6 @@ public final class EchoServer {
              *  1 bind 方法代码, 追踪到 创建了一个端口对象，并做了一些空判断， 核心代码doBind,
              *  2 doBind 源码剖析, 核心是两个方法 initAndRegister 和  doBind0
              *      (1) 分析说明 initAndRegister
-             *
              */
             ChannelFuture f = bootstrap.bind(PORT).sync();
 
