@@ -44,7 +44,7 @@ public final class EchoServer {
             sslCtx = null;
         }
 
-        /**
+        /*
          * Configure the server.
          *
          * 说明:
@@ -91,7 +91,7 @@ public final class EchoServer {
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
-            /**
+            /*
              * 说明:
              *  1) 链式调用：group方法，将boss和worker传入，boss赋值给parentGroup属性,worker赋值给 childGroup 属性
              *  2) channel 方法传入 NioServerSocketChannel class 对象。会根据这个 class 创建 channel 对象。
@@ -117,7 +117,7 @@ public final class EchoServer {
                  }
              });
 
-            /**
+            /*
              * Start the server.
              *  1 bind 方法代码, 追踪到 创建了一个端口对象，并做了一些空判断， 核心代码doBind,
              *  2 doBind 源码剖析, 核心是两个方法 initAndRegister 和  doBind0
