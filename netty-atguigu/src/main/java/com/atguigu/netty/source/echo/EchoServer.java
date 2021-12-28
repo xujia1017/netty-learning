@@ -107,7 +107,7 @@ public final class EchoServer {
              .childHandler(new ChannelInitializer<SocketChannel>() {
 
                  @Override
-                 public void initChannel(SocketChannel ch) throws Exception {
+                 public void initChannel(SocketChannel ch) {
                      ChannelPipeline p = ch.pipeline();
                      if (sslCtx != null) {
                          p.addLast(sslCtx.newHandler(ch.alloc()));
@@ -127,6 +127,7 @@ public final class EchoServer {
 
             // Wait until the server socket is closed.
             f.channel().closeFuture().sync();
+
         } finally {
             // Shut down all event loops to terminate all threads.
             bossGroup.shutdownGracefully();
