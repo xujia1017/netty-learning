@@ -1,13 +1,15 @@
 package com.atguigu.netty.dubborpc.netty;
 
-import java.util.concurrent.Callable;
-
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
+import java.util.concurrent.Callable;
 
 /**
+ * 处理业务Handle
  *
+ * @author Athletic
+ * Created on 2021/12/29 23:13
  */
 public class NettyClientHandler extends ChannelInboundHandlerAdapter implements Callable {
 

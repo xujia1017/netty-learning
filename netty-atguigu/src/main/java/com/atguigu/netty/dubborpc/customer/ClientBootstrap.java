@@ -4,10 +4,12 @@ import com.atguigu.netty.dubborpc.netty.NettyClient;
 import com.atguigu.netty.dubborpc.publicinterface.HelloService;
 
 /**
+ * 启动器
  *
+ * @author Athletic
+ * Created on 2021/12/29 23:26
  */
 public class ClientBootstrap {
-
 
     //这里定义协议头
     public static final String providerName = "HelloService#hello#";
@@ -20,7 +22,7 @@ public class ClientBootstrap {
         //创建代理对象
         HelloService service = (HelloService) customer.getBean(HelloService.class, providerName);
 
-        for (;; ) {
+        while (true) {
             Thread.sleep(2 * 1000);
             //通过代理对象调用服务提供者的方法(服务)
             String res = service.hello("你好 dubbo~");

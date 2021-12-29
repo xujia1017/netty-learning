@@ -20,7 +20,7 @@ public class NettyServer {
     public static void main(String[] args) throws Exception {
 
 
-        /**
+        /*
          * 创建BossGroup 和 WorkerGroup
          *
          *  1. 创建两个线程组 bossGroup 和 workerGroup
@@ -35,7 +35,7 @@ public class NettyServer {
 
         try {
 
-            /**
+            /*
              * 创建服务端启动对象
              *
              * Bootstrap 和 ServerBootstrap 分别是客户端和服务器端的引导类，

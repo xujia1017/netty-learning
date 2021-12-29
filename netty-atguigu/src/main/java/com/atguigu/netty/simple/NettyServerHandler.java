@@ -1,15 +1,11 @@
 package com.atguigu.netty.simple;
 
-import java.util.concurrent.TimeUnit;
-
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.channel.ChannelPipeline;
-import io.netty.channel.EventLoop;
+import io.netty.channel.*;
 import io.netty.util.CharsetUtil;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * 说明
@@ -28,17 +24,17 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
      *
      * @param ctx 上下文对象，可以从中取得相关联的 管道Pipeline、通道Channel、客户端地址等
      * @param msg 客户端发送的数据
-     * @throws Exception
+     * @throws Exception 抛出异常
      */
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
 
 
-        /**
+        /*
          * 比如这里我们有一个非常耗时长的业务-> 异步执行 -> 提交该channel对应的NIOEventLoop的taskQueue中
          */
 
-        /**
+        /*
          * 解决方案1 用户程序自定义的普通任务
          */
         ctx.channel().eventLoop().execute(new Runnable() {
@@ -70,7 +66,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
             }
         });
 
-        /**
+        /*
          * 解决方案2 : 用户自定义定时任务 -> 该任务是提交到scheduleTaskQueue中，与普通任务不在一个队列(NIOEventLoop的taskQueue)中
          */
         ctx.channel().eventLoop().schedule(new Runnable() {
@@ -110,7 +106,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
      * 数据读取完毕后执行
      *
      * @param ctx 上下文对象
-     * @throws Exception
+     * @throws Exception 抛出异常
      */
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
