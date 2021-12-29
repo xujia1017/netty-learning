@@ -4,7 +4,7 @@ import com.atguigu.netty.dubborpc.netty.NettyClient;
 import com.atguigu.netty.dubborpc.publicinterface.HelloService;
 
 /**
- * 启动器
+ * 客户端启动器
  *
  * @author Athletic
  * Created on 2021/12/29 23:26
