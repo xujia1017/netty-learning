@@ -15,12 +15,12 @@
  */
 package com.atguigu.netty.source.echo2;
 
+import java.nio.charset.StandardCharsets;
+
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-
-import java.nio.charset.Charset;
 
 /**
  * Handler implementation for the echo client.  It initiates the ping-pong
@@ -46,7 +46,6 @@ public class EchoClientHandler extends ChannelInboundHandlerAdapter {
      */
     @Override
     public void channelActive(ChannelHandlerContext ctx) {
-
         //给服务器发消息
         ctx.writeAndFlush(Unpooled.copiedBuffer(("hello i am client").getBytes()));
 
@@ -60,7 +59,7 @@ public class EchoClientHandler extends ChannelInboundHandlerAdapter {
         ByteBuf buf = (ByteBuf) msg;
         byte[] bytes = new byte[buf.readableBytes()];
         buf.readBytes(bytes);
-        String s = new String(bytes, Charset.forName("UTF-8"));
+        String s = new String(bytes, StandardCharsets.UTF_8);
         System.out.println("s=" + s);
     }
 

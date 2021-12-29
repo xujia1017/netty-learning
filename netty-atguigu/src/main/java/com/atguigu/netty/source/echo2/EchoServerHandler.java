@@ -15,6 +15,9 @@
  */
 package com.atguigu.netty.source.echo2;
 
+import java.nio.charset.StandardCharsets;
+import java.util.concurrent.Callable;
+
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandler.Sharable;
@@ -23,8 +26,6 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.CharsetUtil;
 import io.netty.util.concurrent.DefaultEventExecutorGroup;
 import io.netty.util.concurrent.EventExecutorGroup;
-
-import java.util.concurrent.Callable;
 
 /**
  * Handler implementation for the echo server.
@@ -41,8 +42,8 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
 
         System.out.println("EchoServer Handler 的线程是=" + Thread.currentThread().getName());
 
-        //按照原来的方法处理耗时任务
-        /*
+        // 按照原来的方法处理耗时任务
+
         //解决方案1 用户程序自定义的普通任务
 
         ctx.channel().eventLoop().execute(new Runnable() {
@@ -75,9 +76,9 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
                     System.out.println("发生异常" + ex.getMessage());
                 }
             }
-        });*/
+        });
 
-        /*
+
         //将任务提交到 group线程池
         group.submit(new Callable<Object>() {
             @Override
@@ -87,7 +88,7 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
                 ByteBuf buf = (ByteBuf) msg;
                 byte[] bytes = new byte[buf.readableBytes()];
                 buf.readBytes(bytes);
-                String body = new String(bytes, "UTF-8");
+                String body = new String(bytes, StandardCharsets.UTF_8);
                 //休眠10秒
                 Thread.sleep(10 * 1000);
                 System.out.println("group.submit 的  call 线程是=" + Thread.currentThread().getName());
@@ -106,7 +107,7 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
                 ByteBuf buf = (ByteBuf) msg;
                 byte[] bytes = new byte[buf.readableBytes()];
                 buf.readBytes(bytes);
-                String body = new String(bytes, "UTF-8");
+                String body = new String(bytes, StandardCharsets.UTF_8);
                 //休眠10秒
                 Thread.sleep(10 * 1000);
                 System.out.println("group.submit 的  call 线程是=" + Thread.currentThread().getName());
@@ -126,7 +127,7 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
                 ByteBuf buf = (ByteBuf) msg;
                 byte[] bytes = new byte[buf.readableBytes()];
                 buf.readBytes(bytes);
-                String body = new String(bytes, "UTF-8");
+                String body = new String(bytes, StandardCharsets.UTF_8);
                 //休眠10秒
                 Thread.sleep(10 * 1000);
                 System.out.println("group.submit 的  call 线程是=" + Thread.currentThread().getName());
@@ -134,7 +135,7 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
                 return null;
 
             }
-        });*/
+        });
 
 
         //普通方式
@@ -142,7 +143,7 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
         ByteBuf buf = (ByteBuf) msg;
         byte[] bytes = new byte[buf.readableBytes()];
         buf.readBytes(bytes);
-        String body = new String(bytes, "UTF-8");
+        String body = new String(bytes, StandardCharsets.UTF_8);
         //休眠10秒
         Thread.sleep(10 * 1000);
         System.out.println("普通调用方式的 线程是=" + Thread.currentThread().getName());
