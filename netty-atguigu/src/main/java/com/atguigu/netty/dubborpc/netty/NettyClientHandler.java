@@ -5,6 +5,10 @@ import java.util.concurrent.Callable;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
+
+/**
+ *
+ */
 public class NettyClientHandler extends ChannelInboundHandlerAdapter implements Callable {
 
     private ChannelHandlerContext context;//上下文

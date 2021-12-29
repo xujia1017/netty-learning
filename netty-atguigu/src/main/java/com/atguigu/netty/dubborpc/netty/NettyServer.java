@@ -19,12 +19,15 @@ public class NettyServer {
         startServer0(hostName,port);
     }
 
-    //编写一个方法，完成对NettyServer的初始化和启动
-
+    /**
+     * 编写一个方法，完成对NettyServer的初始化和启动
+     * @param hostname  地址
+     * @param port  端口
+     */
     private static void startServer0(String hostname, int port) {
 
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
-        EventLoopGroup workerGroup = new NioEventLoopGroup();
+        EventLoopGroup workerGroup = new NioEventLoopGroup(8);
 
         try {
 
@@ -38,11 +41,10 @@ public class NettyServer {
                                           ChannelPipeline pipeline = ch.pipeline();
                                           pipeline.addLast(new StringDecoder());
                                           pipeline.addLast(new StringEncoder());
-                                          pipeline.addLast(new NettyServerHandler()); //业务处理器
-
+                                          //业务处理器
+                                          pipeline.addLast(new NettyServerHandler());
                                       }
                                   }
-
                     );
 
             ChannelFuture channelFuture = serverBootstrap.bind(hostname, port).sync();

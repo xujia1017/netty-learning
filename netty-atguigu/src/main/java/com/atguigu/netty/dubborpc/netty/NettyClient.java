@@ -15,10 +15,15 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 
+
+/**
+ *
+ */
 public class NettyClient {
 
     //创建线程池
-    private static ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+    private static final ExecutorService executor =
+            Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
     private static NettyClientHandler client;
     private int count = 0;
@@ -55,10 +60,9 @@ public class NettyClient {
         bootstrap.group(group)
                 .channel(NioSocketChannel.class)
                 .option(ChannelOption.TCP_NODELAY, true)
-                .handler(
-                        new ChannelInitializer<SocketChannel>() {
+                .handler(new ChannelInitializer<SocketChannel>() {
                             @Override
-                            protected void initChannel(SocketChannel ch) throws Exception {
+                            protected void initChannel(SocketChannel ch) {
                                 ChannelPipeline pipeline = ch.pipeline();
                                 pipeline.addLast(new StringDecoder());
                                 pipeline.addLast(new StringEncoder());
@@ -72,5 +76,6 @@ public class NettyClient {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 }

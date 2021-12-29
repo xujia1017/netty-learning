@@ -2,6 +2,9 @@ package com.atguigu.netty.dubborpc.provider;
 
 import com.atguigu.netty.dubborpc.publicinterface.HelloService;
 
+/**
+ *
+ */
 public class HelloServiceImpl implements HelloService{
 
     private static int count = 0;

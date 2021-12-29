@@ -6,7 +6,9 @@ import com.atguigu.netty.dubborpc.provider.HelloServiceImpl;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
-//服务器这边handler比较简单
+/**
+ * 服务器这边handler比较简单
+ */
 public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
