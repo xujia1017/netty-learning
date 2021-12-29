@@ -19,7 +19,7 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter implements 
 
 
     /**
-     * 当通道就绪就会触发该方法, 这个方法是与服务器的连接创建后第一个被调用
+     * 当通道就绪就会触发该方法, 这个方法是与服务器的连接创建后第一个被调用 (1)
      */
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
@@ -29,7 +29,7 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter implements 
     }
 
     /**
-     * 当通道有读取事件时，即收到服务器的数据后，就会触发调用该方法 (1)
+     * 当通道有读取事件时，即收到服务器的数据后，就会触发调用该方法 (4)
      */
     @Override
     public synchronized void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
@@ -47,7 +47,7 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter implements 
     }
 
     /**
-     * 被代理对象调用, 发送数据给服务器，-> wait -> 等待被唤醒(channelRead) -> 返回结果 (3)-》5
+     * 被代理对象调用, 发送数据给服务器，-> wait -> 等待被唤醒(channelRead) -> 返回结果 (3)->(5)
      */
     @Override
     public synchronized Object call() throws Exception {
