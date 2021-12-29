@@ -33,6 +33,11 @@ import io.netty.util.concurrent.EventExecutorGroup;
 @Sharable
 public class EchoServerHandler extends ChannelInboundHandlerAdapter {
 
+    /*
+     * 处理耗时业务的第一种方式---handler 中加入线程池
+     * 处理耗时业务的第二种方式---Context 中添加线程池
+     */
+
     // group 就是充当业务线程池，可以将任务提交到该线程池
     // 这里我们创建了16个线程
     static final EventExecutorGroup group = new DefaultEventExecutorGroup(16);
@@ -44,8 +49,9 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
 
         // 按照原来的方法处理耗时任务
 
-        //解决方案1 用户程序自定义的普通任务
-
+        /*
+         * 解决方案1 用户程序自定义的普通任务
+         */
         ctx.channel().eventLoop().execute(new Runnable() {
             @Override
             public void run() {
@@ -79,8 +85,12 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
         });
 
 
-        //将任务提交到 group线程池
+        /*
+         * 处理耗时业务的第一种方式---handler 中加入线程池
+         * 将任务提交到 group线程池 异步执行
+         */
         group.submit(new Callable<Object>() {
+
             @Override
             public Object call() throws Exception {
 
@@ -98,7 +108,7 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
             }
         });
 
-        //将任务提交到 group线程池
+        //将任务提交到 group线程池 异步执行
         group.submit(new Callable<Object>() {
             @Override
             public Object call() throws Exception {
@@ -113,32 +123,13 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
                 System.out.println("group.submit 的  call 线程是=" + Thread.currentThread().getName());
                 ctx.writeAndFlush(Unpooled.copiedBuffer("hello, 客户端~(>^ω^<)喵2", CharsetUtil.UTF_8));
                 return null;
-
             }
         });
 
 
-        //将任务提交到 group线程池
-        group.submit(new Callable<Object>() {
-            @Override
-            public Object call() throws Exception {
-
-                //接收客户端信息
-                ByteBuf buf = (ByteBuf) msg;
-                byte[] bytes = new byte[buf.readableBytes()];
-                buf.readBytes(bytes);
-                String body = new String(bytes, StandardCharsets.UTF_8);
-                //休眠10秒
-                Thread.sleep(10 * 1000);
-                System.out.println("group.submit 的  call 线程是=" + Thread.currentThread().getName());
-                ctx.writeAndFlush(Unpooled.copiedBuffer("hello, 客户端~(>^ω^<)喵2", CharsetUtil.UTF_8));
-                return null;
-
-            }
-        });
-
-
-        //普通方式
+        /**
+         * 普通方式
+         */
         //接收客户端信息
         ByteBuf buf = (ByteBuf) msg;
         byte[] bytes = new byte[buf.readableBytes()];
