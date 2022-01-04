@@ -1,9 +1,9 @@
 package com.atguigu.netty.dubborpc.netty;
 
-import java.util.concurrent.Callable;
-
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+
+import java.util.concurrent.Callable;
 
 /**
  * 客户端的业务处理Handle
@@ -22,7 +22,7 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter implements 
 
 
     /**
-     * 这个方法是与服务器的连接创建后第一个被调用, 当通道就绪就会触发该方法  (1)
+     * 这个方法是与服务器的连接创建后第一个被调用, 而且是只会调用一次。当通道就绪就会触发该方法  (1)
      */
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
