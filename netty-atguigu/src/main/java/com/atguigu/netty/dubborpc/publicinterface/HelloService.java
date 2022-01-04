@@ -6,6 +6,8 @@ package com.atguigu.netty.dubborpc.publicinterface;
  * 服务提供方实现这个接口
  * 服务消费方调用这个接口
  *
+ * @author Athletic
+ * Created on 2022-01-04 20:55:11
  */
 public interface HelloService {
 

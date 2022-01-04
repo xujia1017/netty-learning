@@ -4,6 +4,9 @@ import com.atguigu.netty.dubborpc.publicinterface.HelloService;
 
 /**
  * 服务提供方提供的服务(方法)的具体实现类
+ *
+ * @author Athletic
+ * Created on 2022-01-04 20:56:30
  */
 public class HelloServiceImpl implements HelloService{
 
