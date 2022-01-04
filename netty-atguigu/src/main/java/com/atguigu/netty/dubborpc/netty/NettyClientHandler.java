@@ -1,9 +1,9 @@
 package com.atguigu.netty.dubborpc.netty;
 
+import java.util.concurrent.Callable;
+
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-
-import java.util.concurrent.Callable;
 
 /**
  * 客户端的业务处理Handle
@@ -13,13 +13,17 @@ import java.util.concurrent.Callable;
  */
 public class NettyClientHandler extends ChannelInboundHandlerAdapter implements Callable {
 
-    private ChannelHandlerContext context;  //上下文
-    private String result; //返回的结果
-    private String param; //客户端调用方法时，传入的参数
+    //上下文
+    private ChannelHandlerContext context;
+    //客户端调用方法时，传入的参数
+    private String param;
+    //返回的结果
+    private String result;
+
 
 
     /**
-     * 当通道就绪就会触发该方法, 这个方法是与服务器的连接创建后第一个被调用 (1)
+     * 这个方法是与服务器的连接创建后第一个被调用, 当通道就绪就会触发该方法  (1)
      */
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
@@ -39,7 +43,7 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter implements 
     }
 
     /**
-     * 发生异常时执行
+     * 发生异常时,执行处理异常
      */
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
