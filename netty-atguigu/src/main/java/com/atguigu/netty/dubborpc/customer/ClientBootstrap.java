@@ -16,16 +16,16 @@ public class ClientBootstrap {
 
     public static void main(String[] args) throws  Exception{
 
-        //创建一个消费者
+        //创建一个消费者（Netty客户端）
         NettyClient customer = new NettyClient();
 
-        //创建代理对象
-        HelloService service = (HelloService) customer.getBean(HelloService.class, providerName);
+        //通过反射创建服务类的代理对象
+        HelloService helloService = (HelloService) customer.getBean(HelloService.class, providerName);
 
         while (true) {
             Thread.sleep(2 * 1000);
             //通过代理对象调用服务提供者的方法(服务)
-            String res = service.hello("你好 dubbo~");
+            String res = helloService.hello("你好 dubbo~");
             System.out.println("调用的结果 res= " + res);
         }
     }

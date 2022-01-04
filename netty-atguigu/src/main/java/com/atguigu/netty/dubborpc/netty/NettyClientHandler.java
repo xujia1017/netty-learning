@@ -21,7 +21,6 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter implements 
     private String result;
 
 
-
     /**
      * 这个方法是与服务器的连接创建后第一个被调用, 当通道就绪就会触发该方法  (1)
      */
@@ -60,14 +59,15 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter implements 
         //进行wait，等待channelRead 方法获取到服务器的结果后，唤醒该线程
         wait();
         System.out.println(" call2 被调用  ");
-        return  result; //服务方返回的结果
+        //服务方返回的结果
+        return  result;
     }
 
     /**
      * 客户端参数的传递 (2)
      */
     public void setParam(String param) {
-        System.out.println(" setPara  ");
+        System.out.println(" setParam  ");
         this.param = param;
     }
 }

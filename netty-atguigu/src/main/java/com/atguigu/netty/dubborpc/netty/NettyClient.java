@@ -16,7 +16,7 @@ import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 
 /**
- * Netty客户端
+ * Netty客户端-消费者
  *
  * @author Athletic
  * Created on 2022-01-04 20:56:04
@@ -32,7 +32,7 @@ public class NettyClient {
 
     /**
      * 编写方法使用代理模式，获取一个代理对象
-     * @param serivceClass 服务类
+     * @param serivceClass 要代理的服务类的类型
      * @param providerName 服务器端的协议头
      * @return 代理对象
      */
@@ -42,16 +42,15 @@ public class NettyClient {
                 new Class<?>[]{serivceClass}, (proxy, method, args) -> {
 
                     System.out.println("(proxy, method, args) 进入...." + (++count) + " 次");
-                    //{}  部分的代码，客户端每调用一次 hello, 就会进入到该代码
+                    //{}部分的代码，客户端每调用一次 hello, 就会进入到该代码
                     if (clientHandler == null) {
                         initClient();
                     }
 
-                    //设置要发给服务器端的信息
-                    //providerName 协议头 args[0] 就是客户端调用api hello(???), 参数
+                    //设置要发给服务器端的信息。providerName 协议头 args[0] 就是客户端调用api hello(???)时的参数
                     clientHandler.setParam(providerName + args[0]);
 
-                    //
+                    //Future的get方法是阻塞的，只有get到返回值后才会继续执行
                     return executor.submit(clientHandler).get();
 
                 });
@@ -90,6 +89,7 @@ public class NettyClient {
 
 
         try {
+            //启动客户端去连接服务器端
             bootstrap.connect("127.0.0.1", 9000).sync();
         } catch (Exception e) {
             e.printStackTrace();
