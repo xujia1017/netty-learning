@@ -67,7 +67,7 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter implements 
      * 客户端参数的传递 (2)
      */
     public void setParam(String param) {
-        System.out.println(" setParam  ");
+        System.out.println(" setParam 被调用 ");
         this.param = param;
     }
 }
